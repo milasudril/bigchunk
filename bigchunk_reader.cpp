@@ -46,7 +46,7 @@ bool ChunkIO::BigchunkReader::headerRead(Herbs::Stringbase<char>& name)
 		m_source.modeBufferedOff();
 		return 0;
 		}
-		
+
 	uint64_t size;
 	if(m_source.read(&size,sizeof(size))!=sizeof(size))
 		{
@@ -57,13 +57,13 @@ bool ChunkIO::BigchunkReader::headerRead(Herbs::Stringbase<char>& name)
 	m_source.modeBufferedOff();
 	return 1;
 	}
-	
+
 bool ChunkIO::BigchunkReader::skip()
 	{
 	char buffer[4096];
 	while(header_size!=0)
 		{
-		auto n_read=std::min(header_size,4096llu);
+		auto n_read=std::min(header_size,size_t(4096));
 		auto ret=m_source.read(buffer,n_read);
 		if(ret!=n_read)
 			{return 0;}
