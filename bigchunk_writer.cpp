@@ -25,7 +25,7 @@ bool ChunkIO::BigchunkWriter::chunkIDWrite(const char* header_name)
 	return m_dest.write(buffer_out,8)==8;
 	}
 
-bool ChunkIO::BigchunkWriter::chunkSizeWrite(uintmax_t size)
+bool ChunkIO::BigchunkWriter::chunkSizeWrite(uint64_t size)
 	{
 	header_size=size;
 	uint64_t size_out=header_size;
@@ -34,7 +34,7 @@ bool ChunkIO::BigchunkWriter::chunkSizeWrite(uintmax_t size)
 
 size_t ChunkIO::BigchunkWriter::dataWrite(const void* buffer,size_t buffer_size)
 	{
-	auto n_bytes_write=std::min(header_size,buffer_size);
+	auto n_bytes_write=std::min(header_size,uint64_t(buffer_size));
 	auto res=m_dest.write(buffer,n_bytes_write);
 	header_size-=res;
 	return res;

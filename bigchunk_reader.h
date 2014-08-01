@@ -26,7 +26,7 @@ namespace ChunkIO
 	
 		private:	
 			Herbs::StreamIn& m_source;
-			uintmax_t header_size;
+			uint64_t header_size;
 		};
 	};
 

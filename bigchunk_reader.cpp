@@ -63,7 +63,7 @@ bool ChunkIO::BigchunkReader::skip()
 	char buffer[4096];
 	while(header_size!=0)
 		{
-		auto n_read=std::min(header_size,size_t(4096));
+		auto n_read=std::min(header_size,uint64_t(4096));
 		auto ret=m_source.read(buffer,n_read);
 		if(ret!=n_read)
 			{return 0;}
@@ -74,7 +74,7 @@ bool ChunkIO::BigchunkReader::skip()
 
 size_t ChunkIO::BigchunkReader::dataRead(void* buffer,size_t buffer_size)
 	{
-	auto n_read=m_source.read(buffer,std::min(buffer_size,header_size));
+	auto n_read=m_source.read(buffer,std::min(uint64_t(buffer_size),header_size));
 	header_size-=n_read;
 	return n_read;
 	}
