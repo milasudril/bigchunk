@@ -1,6 +1,6 @@
-ChunkIO - Chunk based I/O interfaces
+Bigchunk
 =====================================
-ChunkIO provides interfaces for reading and writing chunk based file formats such as RIFF, PNG and others. As an example, the file format Bigchunk is used. Bigchunk is similiar to RIFF, but uses 8 bytes for chunk id and 8 bytes for chunk size, making it possible to store larger data.
+Bigchunk is a chunkbased fileformat that supports chunks sizes up to 2^64 bytes. This repository contains reader and writer for that format.
 
 Dependencies
 -----------------------------

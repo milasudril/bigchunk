@@ -1,24 +1,36 @@
 #ifdef __WAND__
 target[name[writer.h] type[include]]
+dependency[writer.o]
 #endif
 
-#ifndef CHUNKIO_WRITER_H
-#define CHUNKIO_WRITER_H
+#ifndef BIGCHUNK_WRITER_H
+#define BIGCHUNK_WRITER_H
 
+#include "writer.h"
 #include <cstdint>
-#include <cstddef>
 
-namespace ChunkIO
+namespace Herbs
 	{
-	struct Header;
-	
+	class StreamOut;
+	template<class T>
+	class Stringbase;
+	}
+
+namespace Bigchunk
+	{
 	class Writer
 		{
 		public:
-			virtual bool chunkIDWrite(const char* header_name)=0;
-			virtual bool chunkSizeWrite(uintmax_t size)=0;
-			virtual size_t dataWrite(const void* buffer,size_t buffer_size)=0;
+			Writer(Herbs::StreamOut& dest);
+			
+			bool chunkIDWrite(const char* header_name);
+			bool chunkSizeWrite(uint64_t size);
+			size_t dataWrite(const void* buffer,size_t buffer_size);
+			
+		private:
+			Herbs::StreamOut & m_dest;
+			uint64_t header_size;
 		};
-	};
+	}
 
 #endif

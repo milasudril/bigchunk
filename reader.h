@@ -1,26 +1,33 @@
 #ifdef __WAND__
 target[name[reader.h] type[include]]
+dependency[reader.o]
 #endif
 
-#ifndef CHUNKIO_READER_H
-#define CHUNKIO_READER_H
+#ifndef BIGCHUNK_READER_H
+#define BIGCHUNK_READER_H
+
+#include <cstdint>
 
 namespace Herbs
 	{
+	class StreamIn;
 	template<class T>
 	class Stringbase;
 	}
-	
-#include <cstddef>
 
-namespace ChunkIO
+namespace Bigchunk
 	{
 	class Reader
 		{
 		public:
-			virtual bool headerRead(Herbs::Stringbase<char>& name)=0;
-			virtual size_t dataRead(void* buffer,size_t buffer_size)=0;
-			virtual bool skip()=0;
+			Reader(Herbs::StreamIn& source);
+			bool headerRead(Herbs::Stringbase<char>& name);
+			bool skip();
+			size_t dataRead(void* buffer,size_t buffer_size);
+	
+		private:	
+			Herbs::StreamIn& m_source;
+			uint64_t header_size;
 		};
 	};
 
