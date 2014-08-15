@@ -7,6 +7,7 @@ dependency[reader.o]
 #define BIGCHUNK_READER_H
 
 #include <cstdint>
+#include <cstddef>
 
 namespace Herbs
 	{
@@ -24,8 +25,8 @@ namespace Bigchunk
 			bool headerRead(Herbs::Stringbase<char>& name);
 			bool skip();
 			size_t dataRead(void* buffer,size_t buffer_size);
-	
-		private:	
+
+		private:
 			Herbs::StreamIn& m_source;
 			uint64_t header_size;
 		};
